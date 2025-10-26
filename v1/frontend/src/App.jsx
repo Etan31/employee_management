@@ -23,13 +23,13 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/Dashboard" element={<Dashboard/>}/>
-        <Route path="/userManagement" element={<UserManagement/>}/>
-        <Route path="/Events" element={<Events/>}/>
-        <Route path="/Notification" element={<Notification/>}/>
-        <Route path="/AccessControl" element={<AccessControl/>}/>
-        <Route path="/Support" element={<Support/>}/>
-        <Route path="/Settings" element={<Settings/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/usermanagement" element={<UserManagement/>}/>
+        <Route path="/events" element={<Events/>}/>
+        <Route path="/notification" element={<Notification/>}/>
+        <Route path="/accesscontrol" element={<AccessControl/>}/>
+        <Route path="/support" element={<Support/>}/>
+        <Route path="/settings" element={<Settings/>}/>
         
       </Routes>
     </Router>

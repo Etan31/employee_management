@@ -1,5 +1,6 @@
 import {useState} from "react";
 import './Navigation.css';
+import { Link } from "react-router-dom";
 import Logo from "./../../icons/ic-logo.svg";
 import Navtoggle from "./../../icons/ic-sidebar.svg";
 import IcHome from "../../icons/ic-home.svg" ;
@@ -32,24 +33,34 @@ function Navigation() {
       <div className="main-nav">
         <ul>
           <li className="logo nav-logo home">
-            <img src={IcHome} alt="logo" />
-            <span>Home</span>
+            <Link to='/dashboard'>
+              <img src={IcHome} alt="logo" />
+              <span>Home</span>
+            </Link>
           </li>
           <li className="logo nav-logo manage">
-            <img src={IcManage} alt="logo" />
-            <span>User management</span>
+            <Link to='/usermanagement'>
+              <img src={IcManage} alt="logo" />
+              <span>User management</span>
+            </Link>
           </li>
           <li className="logo nav-logo event">
-            <img src={IcCalender} alt="logo" />
-            <span>Events</span>
+            <Link to='/events'>
+              <img src={IcCalender} alt="logo" />
+              <span>Events</span>
+            </Link>
           </li>
           <li className="logo nav-logo notification">
-            <img src={IcNotification} alt="logo" />
-            <span>Notifications</span>
+            <Link to='/notification'>
+              <img src={IcNotification} alt="logo" />
+               <span>Notifications</span> {/* <span>2</span> //TODO: This will be the number*/}
+            </Link>
           </li>
           <li className="logo nav-logo control">
-            <img src={IcControl} alt="logo" />
-            <span>Access Control</span>
+            <Link to='/accesscontrol'>
+              <img src={IcControl} alt="logo" />
+              <span>Access Control</span>
+            </Link>
           </li>
         </ul>
       </div>
@@ -57,20 +68,26 @@ function Navigation() {
       <div className="system-nav">
         <ul>
           <li className="logo nav-logo support">
-            <img src={IcHelp} alt="logo" />
-            <span>Support</span>
+            <Link to='/support'>
+              <img src={IcHelp} alt="logo" />
+              <span>Support</span>
+            </Link>
           </li>
           <li className="logo nav-logo settings">
-            <img src={IcSettings} alt="logo" />
-            <span>Settings</span>
+            <Link to='/settings'>
+              <img src={IcSettings} alt="logo" />
+              <span>Settings</span>
+            </Link>
           </li>
         </ul>
       </div>
       <div className="account-nav">
         <ul>
           <li className="logo nav-logo exit">
-            <img src={IcExit} alt="logo" />
-            <span>Logout</span>
+            <Link>
+              <img src={IcExit} alt="logo" />
+              <span>Logout</span>
+            </Link>
           </li>
         </ul>
       </div>
