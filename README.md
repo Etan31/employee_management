@@ -27,3 +27,7 @@ npm run dev
 - docs: Update usage instructions in README
 - style: updating styles in a page
 - refactor: Simplify database query logic
+
+### naming
+- [classNames]: this-sample-classname
+- [id]: this-is-sample-id 
