@@ -31,3 +31,6 @@ npm run dev
 ### naming
 - [classNames]: this-sample-classname
 - [id]: this-is-sample-id 
+- [folder]: this_is_sample_folder
+- [imports]: FirstLetterIsUpperCaseSampleImport
+- [files]: this-is-sample-file-name
