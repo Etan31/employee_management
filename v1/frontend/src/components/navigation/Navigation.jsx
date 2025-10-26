@@ -1,5 +1,5 @@
-import React from "react";
-import './Navigation.css'
+import {useState} from "react";
+import './Navigation.css';
 import Logo from "./../../icons/ic-logo.svg";
 import Navtoggle from "./../../icons/ic-sidebar.svg";
 import IcHome from "../../icons/ic-home.svg" ;
@@ -13,14 +13,20 @@ import IcExit from "../../icons/ic-exit.svg" ;
 
 
 function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => setIsOpen(prev => !prev);
+
   return (
-    <nav>
+    <nav className={`${isOpen ? 'navClosed' : 'navOpen'}`}>
       <header>
-        <div className="logo">
-          <img src={Logo} alt="logo" />
-        </div>
-        <div className="nav-toggle">
-          <button><img src={Navtoggle} alt="menu" /></button>
+        <div className="logo-wrapper">
+          <div className="logo">
+            <button><img src={Logo} alt="logo" /></button>
+          </div>
+          <div className="nav-toggle">
+            <button onClick={() => handleClick(isOpen)}><img src={Navtoggle} alt="menu" /></button>
+          </div>
         </div>
       </header>
       <div className="main-nav">

@@ -1,10 +1,19 @@
 nav {
-  width: 250px;
   background: var(--blue);
   height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: width 0.5s ease-out;
+  overflow: hidden;
+}
+
+nav.navOpen {
+  width: 250px;
+}
+
+nav.navClosed {
+  width: 65px;
 }
 
 .bottom-nav {
@@ -23,10 +32,12 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  width: 250px;
 }
 
 ul > li.logo.nav-logo {
   display: flex;
+  width: 250px;
   align-items: center;
   padding: 7px 20px;
   gap: 20px;
@@ -42,4 +53,41 @@ ul > li.logo.nav-logo:hover {
 
 ul > li.logo.nav-logo img {
   width: 24px;
+}
+
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: -webkit-fill-available;
+}
+
+.logo button,
+.nav-toggle button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navClosed .nav-toggle {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.navClosed .logo {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.navClosed .logo-wrapper:hover .logo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navClosed .logo-wrapper:hover .nav-toggle {
+  opacity: 1;
+  pointer-events: auto;
 }
