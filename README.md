@@ -20,3 +20,10 @@ npm run dev
 
 ### NOTE: rename .envcopy to .env file on this directory:
 `v1\backend\.envcopy`
+
+### Coventional Commits
+- feat: new features added
+- fix: resolving bugs
+- docs: Update usage instructions in README
+- style: updating styles in a page
+- refactor: Simplify database query logic
