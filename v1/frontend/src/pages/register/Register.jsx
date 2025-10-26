@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useNavigation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import AuthForm from "./../../components/AuthForm";
 import "./Register.css";
 import "./../../App.css";
 
 function Register() {
-  const navigate = useNavigation();
+  const navigate = useNavigate();
   const [form, setForm] = useState({ username: "", email: "", password: "" });
 
   const handleChange = (e) =>
@@ -22,7 +22,7 @@ function Register() {
 
       const data = await res.json();
       alert(data.message || data.error);
-      navigate("/login");
+      navigate("/login"); 
     } catch (err) {
       console.error("Registration error:", err);
       alert("Something went wrong. Please try again.");

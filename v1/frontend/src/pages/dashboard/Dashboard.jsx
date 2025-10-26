@@ -1,14 +1,15 @@
-// import React from 'react'
-// import { useState } from "react";
-// import { useNavigation } from "react-router-dom";
-// import AuthForm from "./../../components/AuthForm";
+import React from 'react'
+import Navigation from '../../components/navigation/Navigation'
 
+function Dashboard() {
+  return (
+    <>
+    <Navigation/>
+    <main>
+      <h1>Hello</h1>
+    </main>
+    </>
+  )
+}
 
-
-// function Dashboard() {
-//   return (
-    
-//   )
-// }
-
-// export default Dashboard
+export default Dashboard

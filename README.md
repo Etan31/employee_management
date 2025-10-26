@@ -17,3 +17,6 @@ cd frontend
 npm install
 npm run dev
  ``` </pre>
+
+### NOTE: rename .envcopy to .env file on this directory:
+`v1\backend\.envcopy`

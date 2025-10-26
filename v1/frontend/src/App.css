@@ -1,8 +1,15 @@
+:root {
+ --blue: #4FACFE;
+ --gradient: linear-gradient(to right, #4FACFE, #3A4DCC);
+}
+
+
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  display: flex;
+  flex-direction: row;
 }
 
 *, *::before, *::after {
@@ -16,11 +23,17 @@ body {
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   margin: 0;
   padding: 0;
-  background-color: #8c92b4;
+  background-color: white;
 }
 
 .center {
   display:flex;
   flex-direction: column;
   align-items: center;
+}
+
+button {
+  background: none;
+  cursor: pointer;
+  border: none;
 }

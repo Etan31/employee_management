@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthForm from "./../../components/AuthForm";
 import "./../../App.css";
 import "./Login.css";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,7 +21,12 @@ function Login() {
       });
 
       const data = await res.json();
-      alert(data.message || data.error);
+      if (res.ok) {
+        alert(data.message);
+        navigate("/dashboard");
+      } else {
+        alert(data.message || data.error);
+      }
     } catch (err) {
       console.error("Login error:", err);
       alert("Something went wrong. Please try again.");
