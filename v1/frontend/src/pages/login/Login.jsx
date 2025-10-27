@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "./../../components/AuthForm";
 import "./../../App.css";
@@ -6,7 +6,33 @@ import "./Login.css";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(true); // to prevent UI flash
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Gin verify it user gamit an cookie (credentials)
+    const verifySession = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/verify", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          navigate("/dashboard");
+        } else {
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Session check failed:", err);
+        setLoading(false);
+      }
+    };
+
+    verifySession();
+  }, [navigate]);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,14 +40,12 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // sends/receives cookies for login
       const res = await fetch("http://localhost:5000/login", {
         method: "POST",
-        credentials: "include", // ✅ required
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: form.email,
-          password: form.password,
-        }),
+        body: JSON.stringify(form),
       });
 
       const data = await res.json();
@@ -29,7 +53,7 @@ function Login() {
         alert(data.message);
         navigate("/dashboard");
       } else {
-        alert(data.message || data.error);
+        alert(data.error || data.message);
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -37,6 +61,7 @@ function Login() {
     }
   };
 
+  if (loading) return null;
 
   const fields = [
     {
