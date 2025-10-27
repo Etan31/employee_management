@@ -1,6 +1,8 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import './Navigation.css';
-import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./../../icons/ic-logo.svg";
 import Navtoggle from "./../../icons/ic-sidebar.svg";
 import IcHome from "../../icons/ic-home.svg" ;
@@ -15,8 +17,27 @@ import IcExit from "../../icons/ic-exit.svg" ;
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const navigate = useNavigate(); 
+  const { user, loading } = useAuth();
+
+  if (loading) return null; 
 
   const handleClick = () => setIsOpen(prev => !prev);
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data.message);
+      navigate("/login",{ replace: true });
+    } catch (err) {
+      console.error("Logout failed:", err);
+      navigate("/login", { replace: true });
+    }
+  };
 
   return (
     <nav className={`${isOpen ? 'navClosed' : 'navOpen'}`}>
@@ -56,12 +77,15 @@ function Navigation() {
                <span>Notifications</span> {/* <span>2</span> //TODO: This will be the number*/}
             </Link>
           </li>
-          <li className="logo nav-logo control">
-            <Link to='/accesscontrol'>
-              <img src={IcControl} alt="logo" />
-              <span>Access Control</span>
-            </Link>
-          </li>
+          {/* Hinahide in pag dire admin and user */}
+          {user?.role === "admin" && (
+            <li className="logo nav-logo control">
+              <Link to="/accesscontrol">
+                <img src={IcControl} alt="logo" />
+                <span>Access Control</span>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -83,11 +107,10 @@ function Navigation() {
       </div>
       <div className="account-nav">
         <ul>
-          <li className="logo nav-logo exit">
-            <Link>
-              <img src={IcExit} alt="logo" />
-              <span>Logout</span>
-            </Link>
+          {/* //TODO: move the handleLogout after confirmation, first change the onclick to show modal then handle the logout after it. */}
+          <li className="logo nav-logo exit" onClick={handleLogout}>
+            <img src={IcExit} alt="logo" />
+            <span>Logout</span>
           </li>
         </ul>
       </div>

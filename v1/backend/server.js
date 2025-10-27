@@ -6,6 +6,8 @@ const authRoutes = require("./routes/auth");
 const { verifyToken } = require("./middlewares/authMiddleware");
 const seedAdmin = require("./utils/seedAdmin"); 
 
+const { verifyAdmin } = require("./middlewares/verifyAdmin.js");
+
 dotenv.config();
 
 const app = express();
@@ -44,7 +46,7 @@ seedAdmin().then(() => {
   });
 
 
-  app.get("/accesscontrol", verifyToken, (req, res) => {
+  app.get("/accesscontrol", verifyToken, verifyAdmin, (req, res) => {
     res.json({ message: "accesscontrol Access", user: req.user });
   });
 
@@ -56,7 +58,6 @@ seedAdmin().then(() => {
   app.get("/settings", verifyToken, (req, res) => {
     res.json({ message: "Settings Access", user: req.user });
   });
-
 
 
   app.post("/logout", (req, res) => {

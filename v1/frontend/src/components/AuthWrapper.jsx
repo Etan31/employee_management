@@ -13,6 +13,7 @@ const AuthWrapper = ({ children }) => {
           credentials: "include", // sends cookie to backend
         });
         const data = await res.json();
+        console.log("data from authwrapper: ", data)
 
         if (data.success) {
           setIsAuthenticated(true);
