@@ -4,8 +4,8 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: width 0.5s ease-out;
   overflow: hidden;
+  transition: width 0.7s cubic-bezier(.54,.82,0,1.01)
 }
 
 nav.navOpen {
@@ -90,4 +90,12 @@ ul > li.logo.nav-logo img {
 .navClosed .logo-wrapper:hover .nav-toggle {
   opacity: 1;
   pointer-events: auto;
+}
+
+li > a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  color: white;
 }
