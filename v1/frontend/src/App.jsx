@@ -1,19 +1,22 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
+import AuthWrapper from "./components/AuthWrapper";
 
 // pages
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
-import UserManagement from './pages/user_management/user-management';
-import Events from './pages/events/Events';
-import Notification from './pages/notifications/Notifications';
-import AccessControl from './pages/access_control/access-control';
-import Support from './pages/support/Support';
-import Settings from './pages/settings/Settings';
-
-
-
+import UserManagement from "./pages/user_management/user-management";
+import Events from "./pages/events/Events";
+import Notification from "./pages/notifications/Notifications";
+import AccessControl from "./pages/access_control/access-control";
+import Support from "./pages/support/Support";
+import Settings from "./pages/settings/Settings";
 
 function App() {
   return (
@@ -23,14 +26,62 @@ function App() {
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/usermanagement" element={<UserManagement/>}/>
-        <Route path="/events" element={<Events/>}/>
-        <Route path="/notification" element={<Notification/>}/>
-        <Route path="/accesscontrol" element={<AccessControl/>}/>
-        <Route path="/support" element={<Support/>}/>
-        <Route path="/settings" element={<Settings/>}/>
-        
+        <Route
+          path="/dashboard"
+          element={
+            <AuthWrapper>
+              <Dashboard />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/usermanagement"
+          element={
+            <AuthWrapper>
+              <UserManagement />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/events"
+          element={
+            <AuthWrapper>
+              <Events />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/notification"
+          element={
+            <AuthWrapper>
+              <Notification />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/accesscontrol"
+          element={
+            <AuthWrapper>
+              <AccessControl />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/support"
+          element={
+            <AuthWrapper>
+              <Support />
+            </AuthWrapper>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <AuthWrapper>
+              <Settings />
+            </AuthWrapper>
+          }
+        />
       </Routes>
     </Router>
   );

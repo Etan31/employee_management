@@ -14,10 +14,14 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/auth/login", {
+      const res = await fetch("http://localhost:5000/login", {
         method: "POST",
+        credentials: "include", // ✅ required
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+        }),
       });
 
       const data = await res.json();
@@ -32,6 +36,7 @@ function Login() {
       alert("Something went wrong. Please try again.");
     }
   };
+
 
   const fields = [
     {
