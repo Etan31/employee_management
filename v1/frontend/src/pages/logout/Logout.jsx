@@ -2,7 +2,10 @@ import React from 'react'
 
 function Logout() {
   return (
-    <div>Logout</div>
+    <div>
+      Logout
+      {/* //TODO:  Make a modal confirming of logout.*/}
+    </div>
   )
 }
 
