@@ -6,7 +6,6 @@ v1/
  ├── frontend/
  └── backend/
 
-
 ## Backend Setup
 
 1. Open a terminal and run:
@@ -61,8 +60,9 @@ docs: update usage instructions in README
 style: updating styles in a page
 refactor: simplify database query logic
 
-
+----------------------------------
 ## Naming Conventions
+----------------------------------
 classNames: this-sample-classname
 id: this-is-sample-id
 folder: this_is_sample_folder
