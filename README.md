@@ -6,9 +6,7 @@ v1/
  ├── frontend/
  └── backend/
 
-
 ## Backend Setup
-
 1. Open a terminal and run:
 ```bash
 cd backend
@@ -20,7 +18,6 @@ node server.js
    `v1/backend/.envcopy` → `v1/backend/.env`
 
 ## Frontend Setup
-
 1. Open another terminal and run:
 ```bash
 cd frontend
@@ -28,9 +25,8 @@ npm install
 npm run dev
 ```
 
-----------------------------------
+
 ## Running Tests (CI)
-----------------------------------
 A dummy test file is included to make sure the CI pipeline runs correctly.
 
 To run tests manually:
@@ -69,16 +65,12 @@ folder: this_is_sample_folder
 imports: FirstLetterIsUpperCaseSampleImport
 files: this-is-sample-file-name
 
-----------------------------------
 ## Notes
-----------------------------------
 - Ensure both backend and frontend run on compatible ports.
 - Modify your environment variables in the .env file.
 - Follow Conventional Commits for consistent history.
 
-----------------------------------
 ## CI/CD (GitHub Actions)
-----------------------------------
 If you are using GitHub Actions, create the file:
 .github/workflows/test.yml
 
@@ -115,9 +107,8 @@ jobs:
           cd v1/backend
           npm test -- --passWithNoTests
 
-----------------------------------
+
 ## Author Information
-----------------------------------
-Author: ** Tristan Ehron Abogadie Tumbaga **
+Author: **Tristan Ehron Abogadie Tumbaga**
 Version: v1
 License: MIT
