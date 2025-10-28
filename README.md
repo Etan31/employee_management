@@ -37,14 +37,14 @@ npm test
 
 If no tests are found:
 ```bash
-   npm test -- --passWithNoTests
+npm test -- --passWithNoTests
 ```
 
 Example dummy test (backend/__tests__/dummy.test.js):
 ```
-   test('CI sanity check', () => {
-     expect(true).toBe(true);
-   });
+test('CI sanity check', () => {
+    expect(true).toBe(true);
+});
 ```
 
 ## Conventional Commits
