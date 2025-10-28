@@ -10,7 +10,6 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
 
-    # define env here, so secrets are accessible
     env:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -35,25 +34,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug folder structure
+        run: ls -R
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install backend dependencies
-        working-directory: ./backend
+        working-directory: ./v1/backend
         run: npm install
 
       - name: Run backend tests
-        working-directory: ./backend
+        working-directory: ./v1/backend
         run: npm test
 
       - name: Install frontend dependencies
-        working-directory: ./frontend
+        working-directory: ./v1/frontend
         run: npm install
 
       - name: Build frontend
-        working-directory: ./frontend
+        working-directory: ./v1/frontend
         run: npm run build
 
       - name: ✅ CI complete
