@@ -1,6 +1,10 @@
 :root {
  --blue: #4FACFE;
  --gradient: linear-gradient(to right, #4FACFE, #3A4DCC);
+ --blue-30:rgba(79, 172, 254, 0.30);
+ --blue-20:rgba(79, 172, 254, 0.20);
+ --blue-10:rgba(79, 172, 254, 0.1);
+ --white: #fff;
 }
 
 
