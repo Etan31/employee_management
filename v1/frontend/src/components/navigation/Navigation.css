@@ -27,7 +27,7 @@ nav.navClosed {
   height: 580px;
 }
 
-header {
+header.nav-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,5 +100,4 @@ li > a {
   height: 100%;
   text-decoration: none;
   color: white;
-  border: 1px solid red;
 }

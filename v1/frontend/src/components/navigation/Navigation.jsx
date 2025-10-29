@@ -41,7 +41,7 @@ function Navigation() {
 
   return (
     <nav className={`${isOpen ? 'navClosed' : 'navOpen'}`}>
-      <header>
+      <header className="nav-header">
         <div className="logo-wrapper">
           <div className="logo">
             <button><img src={Logo} alt="logo" /></button>
