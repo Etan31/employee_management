@@ -26,7 +26,7 @@ function Dashboard() {
           <header>
             <h1>Dashboard</h1>
             {/* Admin & Hr */}
-            {user.role === "admin" ? (
+            {user?.role === "admin" ? (
               <p>
                 Manage employees, departments, and activities, including totals,
                 active staff, recent hires, events, and onboarding, with options

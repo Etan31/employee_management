@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthForm from "./../../components/AuthForm";
+import { useAuth } from "../../context/AuthContext";
 import "./../../App.css";
 import "./Login.css";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(true); // to prevent UI flash
+  const [loading, setLoading] = useState(true); 
   const navigate = useNavigate();
+  const { fetchUser } = useAuth();
 
   useEffect(() => {
     // Gin verify it user gamit an cookie (credentials)
@@ -30,7 +32,7 @@ function Login() {
         setLoading(false);
       }
     };
-
+    
     verifySession();
   }, [navigate]);
 
@@ -50,6 +52,7 @@ function Login() {
 
       const data = await res.json();
       if (res.ok) {
+        await fetchUser();
         alert(data.message);
         navigate("/dashboard");
       } else {
