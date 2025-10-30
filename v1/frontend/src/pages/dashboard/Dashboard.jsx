@@ -1,8 +1,22 @@
-import React from "react";
+import { useState, React } from "react";
+import "./Dashboard.css";
 import Navigation from "../../components/navigation/Navigation";
 import IcView from "../../icons/ic-view.svg";
+import IcActiveEmployee from "../../icons/ic-active-employee.svg";
+import IcEmployee from "../../icons/ic-employee.svg";
+import IcDepartment from "../../icons/ic-department.svg";
+import { useAuth } from "../../context/AuthContext";
+import IcPlus from "../../icons/ic-plus.svg";
 
 function Dashboard() {
+  const { user, loading } = useAuth();
+  const [open, setOpen] = useState(false);
+  if (loading) return null;
+
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
       <div className="layout">
@@ -12,41 +26,91 @@ function Dashboard() {
           <header>
             <h1>Dashboard</h1>
             {/* Admin & Hr */}
-            <p>
-              Manage employees, departments, and activities, including totals,
-              active staff, recent hires, events, and onboarding, with options
-              to create users and events.
-            </p>
-
-            {/* For the employee */}
-            <p>
-              View total employees, your department info, absences/leave, and
-              recent activities like hires, events, and orientations.
-            </p>
+            {user.role === "admin" ? (
+              <p>
+                Manage employees, departments, and activities, including totals,
+                active staff, recent hires, events, and onboarding, with options
+                to create users and events.
+              </p>
+            ) : (
+              <p>
+                View total employees, your department info, absences/leave, and
+                recent activities like hires, events, and orientations.
+              </p>
+            )}
           </header>
+
+          <div className="add">
+            <div className="plus">
+              <button
+                className={`btn-plus ${open ? "open" : ""}`}
+                onClick={handleToggle}
+              >
+                <img src={IcPlus} alt="Plus" />
+              </button>
+            </div>
+            <ul className={`add-list ${open ? "show" : ""}`}>
+              <li className="li-add">
+                <button className="btn add-employee">Add Employee</button>
+              </li>
+              <li className="li-add">
+                <button className="btn create-event">Create Event</button>
+              </li>
+              <li className="li-add">
+                <button className="btn add-department">Add Department</button>
+              </li>
+              <li className="li-add">
+                <button className="btn add-department">Add Position</button>
+              </li>
+            </ul>
+          </div>
 
           <div className="stats-group">
             <div className="stats total-employee-stat">
-              <h2>Total employee</h2>
-              <span>102</span>
+              <div className="ic">
+                <img className="stats-icon" src={IcEmployee} alt="Employee" />
+              </div>
+              <div className="text">
+                <h2>Total employee</h2>
+                <span>102</span>
+              </div>
             </div>
             <div className="stats total-department-stat">
-              <h2>Total department</h2>
-              <span>12</span>
+              <div className="ic">
+                <img
+                  className="stats-icon"
+                  src={IcDepartment}
+                  alt="Department"
+                />
+              </div>
+              <div className="text">
+                <h2>Total department</h2>
+                <span>12</span>
+              </div>
             </div>
             <div className="stats active-employee-stat">
-              <h2>Active employee</h2>
-              <span>40</span>
+              <div className="ic">
+                <img
+                  className="stats-icon"
+                  src={IcActiveEmployee}
+                  alt="Active Employee"
+                />
+              </div>
+              <div className="text">
+                <h2>Active employee</h2>
+                <span>40</span>
+              </div>
             </div>
           </div>
 
           <div className="logs-group">
             <div className="logs upcoming-event">
+              <h2>Upcoming Event</h2>
               <ul>
                 <li>
                   <div className="event-info">
-                    <h3>Event Title</h3>
-                    
+                    <p>Event Title</p>
+
                     <div className="date-time">
                       <span className="date">Oct 12,2025</span>{" "}
                       <span className="separator">-</span>{" "}
@@ -66,7 +130,22 @@ function Dashboard() {
                 </li>
               </ul>
             </div>
-            <div className="logs recent-activity"></div>
+            <div className="logs recent-activity">
+              <h2>Recent</h2>
+              <ul>
+                <li>
+                  <div className="activity-info">
+                    <p>Newly hired on HR department</p>
+                    <span className="separator">-</span>
+                    <div className="date-and-time">
+                      <span className="date">Oct 21</span>{" "}
+                      <span className="comma">,</span>{" "}
+                      <span className="time">9:20pm</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </main>
       </div>
