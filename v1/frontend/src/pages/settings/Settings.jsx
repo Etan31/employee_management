@@ -1,8 +1,16 @@
 import React from 'react'
+import Navigation from "../../components/navigation/Navigation";
 
 function Settings() {
   return (
-    <div>Settings</div>
+    <>
+      <div className="layout">
+        <Navigation/>
+        <div className="main">
+          <h1>Settings</h1>
+        </div>
+      </div>
+    </>
   )
 }
 

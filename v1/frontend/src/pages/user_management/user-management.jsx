@@ -7,7 +7,7 @@ function Usermanagement() {
       <div className="layout">
         <Navigation/>
         <div className="main">
-          <h1>Hellow</h1>
+          <h1>User management</h1>
         </div>
       </div>
     </>
