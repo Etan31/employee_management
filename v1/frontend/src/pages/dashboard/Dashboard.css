@@ -79,7 +79,6 @@ div.text span {
   z-index: 2;
   border-radius: 50%;
   background: var(--gradient);
-  padding: 8px;
   transition: transform 1s cubic-bezier(0, 1.12, 0.67, 0.66);
 }
 

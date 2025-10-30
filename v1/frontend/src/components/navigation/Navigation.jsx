@@ -74,10 +74,12 @@ function Navigation() {
           <li className="logo nav-logo notification">
             <Link to='/notification'>
               <img src={IcNotification} alt="logo" />
-               <span>Notifications</span> {/* <span>2</span> //TODO: This will be the number*/}
+               <span>Notifications</span> {/* <span>2</span> //TODO: Should have a number here*/}
             </Link>
           </li>
-          {/* Hinahide in pag dire admin and user */}
+          {/* TODO: bug, after logging in as admin, this li show, and after try to logged out. After logging in again without refreshing the page as employee, the li still there. Only removes if you refresh the page.
+          Vice versa
+          */}
           {user?.role === "admin" && (
             <li className="logo nav-logo control">
               <Link to="/accesscontrol">
