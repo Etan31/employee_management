@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthForm from "./../../components/AuthForm";
 import "./Register.css";
 import "./../../App.css";
@@ -14,7 +14,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/auth/register", {
+      const res = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -22,7 +22,7 @@ function Register() {
 
       const data = await res.json();
       alert(data.message || data.error);
-      navigate("/login"); 
+      navigate("/login");
     } catch (err) {
       console.error("Registration error:", err);
       alert("Something went wrong. Please try again.");
