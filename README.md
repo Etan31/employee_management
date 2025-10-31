@@ -25,6 +25,29 @@ npm install
 npm run dev
 ```
 
+## 🧩 Tech Stack / Libraries Used
+
+### **Frontend**
+- React.js
+- React Router DOM
+- Fetch API
+- CSS Modules / Custom CSS
+
+### **Backend**
+- Node.js
+- Express.js
+- bcryptjs
+- jsonwebtoken (JWT)
+- crypto
+- pg (node-postgres) 
+
+### **Database**
+- PostgreSQL
+
+### **Testing**
+- Jest
+
+
 
 ## Running Tests (CI)
 A dummy test file is included to make sure the CI pipeline runs correctly.
