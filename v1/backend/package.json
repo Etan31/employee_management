@@ -10,9 +10,15 @@
     "pg": "^8.16.3"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:client": "jest"
   },
   "devDependencies": {
     "jest": "^30.2.0"
-  }
+  },
+  "presets": [
+    "@babel/preset-env"
+  ]
 }

@@ -1,0 +1,12 @@
+{
+  "name": "employee-portal",
+  "private": true,
+  "scripts": {
+    "test:client": "npm --prefix ./frontend test",
+    "test:server": "npm --prefix ./backend test",
+    "test:all": "npm-run-all --parallel test:server test:client"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
