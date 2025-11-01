@@ -1,3 +1,6 @@
+//Login.jsx
+
+
 // Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +26,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+
+    // Validate form
+    if (!form.email || !form.password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:5000/login", {
@@ -41,7 +51,6 @@ const Login = () => {
         await fetchUser(); // refresh user context
         navigate("/dashboard");
       } else {
-        console.warn("⚠️ Login failed:", data);
         setError(data.error || "Invalid email or password");
       }
     } catch (err) {
