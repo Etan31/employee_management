@@ -47,7 +47,6 @@ const Login = () => {
       const data = await res.json();
 
       if (res.ok) {
-        console.log("✅ Login successful:", data);
         await fetchUser(); // refresh user context
         navigate("/dashboard");
       } else {
