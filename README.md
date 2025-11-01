@@ -50,25 +50,26 @@ npm run dev
 
 
 ## Running Tests (CI)
-A dummy test file is included to make sure the CI pipeline runs correctly.
-
-To run tests manually:
+To run all the test, go to the root of the `v1/` project directory,
 ```bash
-cd backend
-npm test
+npm run test:all
 ```
 
-If no tests are found:
+### Test for Backend or Frontend separately
+If you want to test either backend or frontend:
+
+**FRONTEND**
+  Go to the `v1/frontend`
 ```bash
-npm test -- --passWithNoTests
+npx jest --config jest.config.cjs
 ```
 
-Example dummy test (backend/__tests__/dummy.test.js):
+**BACKEND**
+  Go to the `v1/backend`
+```bash
+npx jest --config jest.config.cjs
 ```
-test('CI sanity check', () => {
-    expect(true).toBe(true);
-});
-```
+
 
 ## Conventional Commits
 
