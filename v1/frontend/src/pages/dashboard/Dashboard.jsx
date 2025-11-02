@@ -8,9 +8,12 @@ import IcDepartment from "../../icons/ic-department.svg";
 import { useAuth } from "../../context/AuthContext";
 import IcPlus from "../../icons/ic-plus.svg";
 
+import AddEmployeeModal from "../../components/modal/AddEmployeeModal";
+
 function Dashboard() {
   const { user, loading } = useAuth();
   const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   if (loading) return null;
 
   const handleToggle = () => {
@@ -40,30 +43,40 @@ function Dashboard() {
             )}
           </header>
 
-          <div className="add">
-            <div className="plus">
-              <button
-                className={`btn-plus ${open ? "open" : ""}`}
-                onClick={handleToggle}
-              >
-                <img src={IcPlus} alt="Plus" />
-              </button>
+          {/* //TODO: isolate this to its own component  */}
+          {user?.role === "admin" && (
+            <div className="add">
+              <div className="plus">
+                <button
+                  className={`btn-plus ${open ? "open" : ""}`}
+                  onClick={handleToggle}
+                >
+                  <img src={IcPlus} alt="Plus" />
+                </button>
+              </div>
+              <ul className={`add-list ${open ? "show" : ""}`}>
+                <li className="li-add">
+                  <button
+                    className="btn add-employee"
+                    onClick={() => setIsOpen(true)}
+                  >
+                    Add Employee
+                  </button>
+                </li>
+                <li className="li-add">
+                  <button className="btn create-event">Create Event</button>
+                </li>
+                <li className="li-add">
+                  <button className="btn add-department">Add Department</button>
+                </li>
+                <li className="li-add">
+                  <button className="btn add-department">Add Position</button>
+                </li>
+              </ul>
             </div>
-            <ul className={`add-list ${open ? "show" : ""}`}>
-              <li className="li-add">
-                <button className="btn add-employee">Add Employee</button>
-              </li>
-              <li className="li-add">
-                <button className="btn create-event">Create Event</button>
-              </li>
-              <li className="li-add">
-                <button className="btn add-department">Add Department</button>
-              </li>
-              <li className="li-add">
-                <button className="btn add-department">Add Position</button>
-              </li>
-            </ul>
-          </div>
+          )}
+
+          <AddEmployeeModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 
           <div className="stats-group">
             <div className="stats total-employee-stat">
