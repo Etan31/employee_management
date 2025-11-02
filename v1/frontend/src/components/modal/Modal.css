@@ -1,0 +1,169 @@
+.slide h3 {
+  font-size: 15px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25); /* black with 25% opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  gap: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+}
+
+label:has(input[required])::after,
+fieldset:has(input[required]) legend::after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
+
+label.required::after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
+
+.btn-close {
+  filter: invert(32%) sepia(100%) saturate(2498%) hue-rotate(193deg)
+    brightness(97%) contrast(101%);
+  rotate: 45deg;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  padding: unset;
+  flex-direction: row;
+}
+
+.carousel,
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: unset;
+  width: 100%;
+  gap: 0.7rem;
+}
+
+fieldset input {
+  width: 50px;
+  flex: 1;
+  min-width: 50px;
+  box-sizing: border-box;
+  height: 25px;
+}
+
+.form.personal-info,
+.form.contact-info,
+.form.organizational-info {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form.personal-info input,
+.form.contact-info input,
+.form.organizational-info input {
+  display: flex;
+  margin-bottom: 20px;
+  height: 25px;
+}
+
+.slide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* display: none; */
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slide.active {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  opacity: 1;
+  transform: scale(1);
+  font-weight: bold;
+}
+
+.form-group.hidden {
+  display: none;
+}
+
+.form-group.active {
+  display: flex;
+  padding: 0 37px;
+  gap: 25px;
+}
+
+.toggleBtn {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  justify-content: flex-end;
+}
+
+.toggleBtn button {
+  border-radius: 5px;
+  border: 1px solid var(--blue);
+  padding: 8px 20px;
+}
+button.back {
+  color: var(--blue);
+}
+
+button.next,
+button.submit {
+  background-color: var(--blue);
+  color: var(--white);
+  font-size: 600;
+}
+
+button.submit {
+  background: var(--blue);
+  transition: background 1s ease-in;
+}
+
+button.submit:hover{
+  background: var(--gradient);
+}
+
+
+
+label.readonly,
+label.required,
+fieldset legend {
+  font-size: 13px;
+}
