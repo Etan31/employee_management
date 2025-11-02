@@ -1,14 +1,41 @@
-function ContactInfoForm() {
+function ContactInfoForm({ formData, onChange }) {
   return (
     <div className="form contact-info">
-      <label htmlFor="email"  className="readonly">Email</label>
-      <input type="text" name="email" placeholder="Email" readOnly />
+      <label htmlFor="email" className="readonly">
+        Email
+      </label>
+      <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={onChange}
+        readOnly
+      />
 
-      <label htmlFor="phone" className="required">Phone Number</label>
-      <input type="text" name="phone" placeholder="Phone number" required />
+      <label htmlFor="phone_number" className="required">
+        Phone Number
+      </label>
+      <input
+        type="text"
+        name="phone_number"
+        placeholder="Phone number"
+        value={formData.phone_number}
+        onChange={onChange}
+        required
+      />
 
-      <label htmlFor="location" className="required">Location</label>
-      <input type="text" name="location" placeholder="Location" required />
+      <label htmlFor="location" className="required">
+        Location
+      </label>
+      <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        value={formData.location}
+        onChange={onChange}
+        required
+      />
     </div>
   );
 }

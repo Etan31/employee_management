@@ -9,12 +9,38 @@ import IcPlus from "../../icons/ic-plus.svg";
 export default function AddEmployeeModal({ isOpen, onClose }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleSubmit = (e) => {
+  const [form, setForm] = useState({});
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (activeIndex !== slides.length - 1) {
-      return; // Don't submit unless we're on the last slide
+
+    if (activeIndex !== slides.length - 1) return;
+
+    e.preventDefault();
+
+    if (activeIndex !== slides.length - 1) return;
+
+    try {
+      const res = await fetch("http://localhost:5000/addemployee", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+      console.log("Server response:", data);
+
+      alert("Employee added successfully!");
+      onClose(); // optional: close modal
+      setForm({}); // optional: reset form
+      setActiveIndex(0); // optional: reset slide
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Something went wrong. Please try again.");
     }
-    // submit logic here
   };
 
   const nextSlide = (e) => {
@@ -28,9 +54,18 @@ export default function AddEmployeeModal({ isOpen, onClose }) {
   };
 
   const slides = [
-    { title: "Personal Information", form: <PersonalInfoForm /> },
-    { title: "Contact Details", form: <ContactInfoForm /> },
-    { title: "Organizational Information", form: <OrganizationalInfoForm /> },
+    {
+      title: "Personal Information",
+      form: <PersonalInfoForm formData={form} onChange={handleChange} />,
+    },
+    {
+      title: "Contact Details",
+      form: <ContactInfoForm formData={form} onChange={handleChange} />,
+    },
+    {
+      title: "Organizational Information",
+      form: <OrganizationalInfoForm formData={form} onChange={handleChange} />,
+    },
   ];
 
   return (

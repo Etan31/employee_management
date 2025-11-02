@@ -1,17 +1,39 @@
-function OrganizationalInfoForm() {
+function OrganizationalInfoForm({ formData, onChange }) {
   return (
     <div className="form organizational-info">
-      <label htmlFor="department" className="required">Department</label>
-      <input type="text" name="department" placeholder="Department" required />
+      <label htmlFor="department" className="required">
+        Department
+      </label>
+      <input
+        type="text"
+        name="department"
+        placeholder="Department"
+        value={formData.department}
+        onChange={onChange}
+        required
+      />
 
-      <label htmlFor="position" className="required">Position</label>
-      <input type="text" name="position" placeholder="Position" required />
+      <label htmlFor="position" className="required">
+        Position
+      </label>
+      <input
+        type="text"
+        name="position"
+        placeholder="Position"
+        value={formData.position}
+        onChange={onChange}
+        required
+      />
 
-      <label htmlFor="employment_status" className="required">Employment Status</label>
+      <label htmlFor="employment_status" className="required">
+        Employment Status
+      </label>
       <input
         type="text"
         name="employment_status"
         placeholder="Employment Status"
+        value={formData.employment_status}
+        onChange={onChange}
         required
       />
 
@@ -22,6 +44,8 @@ function OrganizationalInfoForm() {
           name="joined_month"
           placeholder="MM"
           aria-label="Month"
+          value={formData.joined_month}
+          onChange={onChange}
           required
         />
         <input
@@ -29,6 +53,8 @@ function OrganizationalInfoForm() {
           name="joined_day"
           placeholder="DD"
           aria-label="Day"
+          value={formData.first_day}
+          onChange={onChange}
           required
         />
         <input
@@ -36,6 +62,8 @@ function OrganizationalInfoForm() {
           name="joined_year"
           placeholder="YYYY"
           aria-label="Year"
+          value={formData.joined_year}
+          onChange={onChange}
           required
         />
       </fieldset>
