@@ -144,16 +144,15 @@ button.back {
   color: var(--blue);
 }
 
+button.back:hover {
+  outline: 2px solid var(--blue);
+}
+
 button.next,
 button.submit {
   background-color: var(--blue);
   color: var(--white);
-  font-size: 600;
-}
-
-button.submit {
-  background: var(--blue);
-  transition: background 1s ease-in;
+  font-weight: 600;
 }
 
 button.submit:hover{
