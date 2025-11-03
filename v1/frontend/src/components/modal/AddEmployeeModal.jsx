@@ -31,12 +31,11 @@ export default function AddEmployeeModal({ isOpen, onClose }) {
       });
 
       const data = await res.json();
-      console.log("Server response:", data);
 
       alert("Employee added successfully!");
-      onClose(); // optional: close modal
-      setForm({}); // optional: reset form
-      setActiveIndex(0); // optional: reset slide
+      onClose(); //close modal
+      setForm({}); //reset form
+      setActiveIndex(0); //reset slide
     } catch (error) {
       console.error("Submission error:", error);
       alert("Something went wrong. Please try again.");

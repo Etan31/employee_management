@@ -1,26 +1,38 @@
 function OrganizationalInfoForm({ formData, onChange }) {
   return (
     <div className="form organizational-info">
-      <label htmlFor="department" className="required">
+      <label htmlFor="department_id" className="required">
         Department
       </label>
       <input
         type="text"
-        name="department"
+        name="department_id"
         placeholder="Department"
-        value={formData.department}
+        value={formData.department_id}
         onChange={onChange}
         required
       />
 
-      <label htmlFor="position" className="required">
+      <label htmlFor="position_id" className="required">
         Position
       </label>
       <input
         type="text"
-        name="position"
+        name="position_id"
         placeholder="Position"
-        value={formData.position}
+        value={formData.position_id}
+        onChange={onChange}
+        required
+      />
+
+      <label htmlFor="manager_id" className="required">
+        Manager
+      </label>
+      <input
+        type="text"
+        name="manager_id"
+        placeholder="Manager"
+        value={formData.manager_id}
         onChange={onChange}
         required
       />

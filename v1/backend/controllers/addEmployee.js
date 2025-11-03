@@ -10,7 +10,7 @@ exports.addEmployee = async (req, res) => {
     const date_of_birth = `${data.year}-${data.month}-${data.day}`;
     const joined_date = `${data.joined_year}-${data.joined_month}-${data.joined_day}`;
 
-    const query = `INSERT INTO employees (emp_id, first_name, middle_name, last_name, date_of_birth, gender, email, phone_number, location, department_id, position_id, joined_date, employment_status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) 
+    const query = `INSERT INTO employees (emp_id, first_name, middle_name, last_name, date_of_birth, gender, email, phone_number, location, department_id, position_id, manager_id, joined_date, employment_status) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) 
      RETURNING *; `;
     const values = [
       employeeId,
@@ -24,6 +24,7 @@ exports.addEmployee = async (req, res) => {
       data.location,
       data.department_id,
       data.position_id,
+      data.manager_id,
       joined_date,
       data.employment_status,
     ];
