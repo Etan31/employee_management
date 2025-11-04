@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 import ContactInfoForm from "./forms/ContactInfoForm";
 import OrganizationalInfoForm from "./forms/OrganizationalInfoForm";
+import AccountInfoForm from "./forms/AccountInfoForm";
 import "./Modal.css";
 import IcPlus from "../../icons/ic-plus.svg";
 
@@ -44,7 +45,7 @@ export default function AddEmployeeModal({ isOpen, onClose }) {
 
   const nextSlide = (e) => {
     e.preventDefault(); // Prevent any form submission
-    if (activeIndex < 2) setActiveIndex(activeIndex + 1);
+    if (activeIndex < 3) setActiveIndex(activeIndex + 1);
   };
 
   const prevSlide = (e) => {
@@ -64,6 +65,10 @@ export default function AddEmployeeModal({ isOpen, onClose }) {
     {
       title: "Organizational Information",
       form: <OrganizationalInfoForm formData={form} onChange={handleChange} />,
+    },
+    {
+      title: "Account Information",
+      form: <AccountInfoForm formData={form} onChange={handleChange} />,
     },
   ];
 
