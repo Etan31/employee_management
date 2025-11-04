@@ -1,6 +1,7 @@
 function PersonalInfoForm({ formData, onChange }) {
   return (
     <div className="form personal-info">
+
       <label htmlFor="first_name" className="required">
         First Name
       </label>
@@ -68,11 +69,11 @@ function PersonalInfoForm({ formData, onChange }) {
         />
       </fieldset>
 
-      <label htmlFor="gender" className="readonly">
+      <label htmlFor="gender" className="optional">
         Gender
       </label>
       <input type="text" name="gender" placeholder="Gender" value={formData.gender || ""}
-      onChange={onChange} readOnly />
+      onChange={onChange} />
     </div>
   );
 }

@@ -65,7 +65,7 @@ function OrganizationalInfoForm({ formData, onChange }) {
           name="joined_day"
           placeholder="DD"
           aria-label="Day"
-          value={formData.first_day}
+          value={formData.joined_day}
           onChange={onChange}
           required
         />

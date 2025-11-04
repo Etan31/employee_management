@@ -1,17 +1,6 @@
 function ContactInfoForm({ formData, onChange }) {
   return (
     <div className="form contact-info">
-      <label htmlFor="email" className="readonly">
-        Email
-      </label>
-      <input
-        type="text"
-        name="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={onChange}
-        readOnly
-      />
 
       <label htmlFor="phone_number" className="required">
         Phone Number
