@@ -163,6 +163,7 @@ button.submit:hover{
 
 label.readonly,
 label.required,
-fieldset legend {
+fieldset legend,
+label.optional {
   font-size: 13px;
 }
