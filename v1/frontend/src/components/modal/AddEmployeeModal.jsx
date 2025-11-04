@@ -9,8 +9,29 @@ import IcPlus from "../../icons/ic-plus.svg";
 
 export default function AddEmployeeModal({ isOpen, onClose }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [form, setForm] = useState({
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    month: "",
+    day: "",
+    year: "",
+    gender: "",
+    phone_number: "",
+    location: "",
+    department_id: "",
+    position_id: "",
+    manager_id: "",
+    employment_status: "",
+    joined_month: "",
+    joined_day: "",
+    joined_year: "",
+    username: "",
+    email: "",
+    password: "",
+    role: "",
+  });
 
-  const [form, setForm] = useState({});
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
