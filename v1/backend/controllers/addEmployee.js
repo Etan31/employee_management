@@ -3,7 +3,18 @@ const crypto = require("crypto");
 
 exports.addEmployee = async (req, res) => {
   const data = req.body;
-  const client = await pool.connect();
+  
+  let client;
+  //  To avoid unhandled exceptions during error handling.
+  try {
+    client = await pool.connect();
+  } catch (connErr) {
+    console.error("DB connection error:", connErr);
+    return res
+      .status(500)
+      .json({ error: "Server error, could not connect to DB" });
+  }
+
   const created_at = new Date().toISOString().slice(0, 19).replace("T", " ");
 
   try {
@@ -69,10 +80,25 @@ exports.addEmployee = async (req, res) => {
       employee: empResult.rows[0],
     });
   } catch (error) {
-    await client.query("ROLLBACK");
-    console.error("Error adding employee and user:", error);
+    // Attempt to rollback if we have a client
+    try {
+      if (client && client.query) await client.query("ROLLBACK");
+    } catch (rbErr) {
+      // Log rollback error (but avoid noisy logs during tests)
+      if (process.env.NODE_ENV !== "test")
+        console.error("Rollback error:", rbErr);
+    }
+
+    // Log the original error (avoid noisy logs during tests)
+    if (process.env.NODE_ENV !== "test")
+      console.error("Error adding employee and user:", error);
     res.status(500).json({ error: "Server error, transaction failed" });
   } finally {
-    client.release();
+    try {
+      if (client && client.release) client.release();
+    } catch (relErr) {
+      if (process.env.NODE_ENV !== "test")
+        console.error("Error releasing client:", relErr);
+    }
   }
 };
