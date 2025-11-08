@@ -159,8 +159,6 @@ button.submit:hover{
   background: var(--gradient);
 }
 
-
-
 label.readonly,
 label.required,
 fieldset legend,

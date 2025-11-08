@@ -9,11 +9,13 @@ import { useAuth } from "../../context/AuthContext";
 import IcPlus from "../../icons/ic-plus.svg";
 
 import AddEmployeeModal from "../../components/modal/AddEmployeeModal";
+import AddEventModal from "../../components/modal/event/AddEventModal";
 
 function Dashboard() {
   const { user, loading } = useAuth();
   const [open, setOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEmployee, setOpenEmployee] = useState(false);
+  const [isOpenEvent, setOpenEvent] = useState(false);
   if (loading) return null;
 
   const handleToggle = () => {
@@ -58,13 +60,13 @@ function Dashboard() {
                 <li className="li-add">
                   <button
                     className="btn add-employee"
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => setOpenEmployee(true)}
                   >
                     Add Employee
                   </button>
                 </li>
                 <li className="li-add">
-                  <button className="btn create-event">Create Event</button>
+                  <button className="btn create-event" onClick={() => setOpenEvent(true)}>Create Event</button>
                 </li>
                 <li className="li-add">
                   <button className="btn add-department">Add Department</button>
@@ -76,7 +78,8 @@ function Dashboard() {
             </div>
           )}
 
-          <AddEmployeeModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+          <AddEmployeeModal isOpen={isOpenEmployee} onClose={() => setOpenEmployee(false)} />
+          <AddEventModal isOpen={isOpenEvent} onClose={() => setOpenEvent(false)} />
 
           <div className="stats-group">
             <div className="stats total-employee-stat">

@@ -1,0 +1,22 @@
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-text h2 {
+  font-size: 20px;
+}
+
+header.modal-header {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  padding-bottom: 15px;
+}
+
+.input-textarea {
+  resize: both;
+  max-width: 400px;
+  max-height: 200px;
+  overflow: auto;   
+}
