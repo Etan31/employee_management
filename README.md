@@ -94,6 +94,9 @@ files: this-is-sample-file-name
 - Modify your environment variables in the .env file.
 - Follow Conventional Commits for consistent history.
 
+## API Used
+- Philippine Standard Geographic Code (PSGC)
+
 ## CI/CD (GitHub Actions)
 If you are using GitHub Actions, create the file:
 .github/workflows/test.yml
