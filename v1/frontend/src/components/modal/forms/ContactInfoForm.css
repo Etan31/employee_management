@@ -1,0 +1,51 @@
+.location-fields {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  flex: 1;
+}
+
+.location-input-container {
+  position: relative;
+  width: 100%;
+}
+
+.location-input-container input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+/* Style for the datalist dropdown */
+input::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Focus state */
+.location-input-container input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Hover state */
+.location-input-container input:hover {
+  border-color: #999;
+}
