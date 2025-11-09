@@ -41,10 +41,6 @@ export default function AddEmployeeModal({ isOpen, onClose }) {
 
     if (activeIndex !== slides.length - 1) return;
 
-    e.preventDefault();
-
-    if (activeIndex !== slides.length - 1) return;
-
     try {
       const res = await fetch("http://localhost:5000/addemployee", {
         method: "POST",
