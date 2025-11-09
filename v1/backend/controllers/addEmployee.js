@@ -48,10 +48,10 @@ exports.addEmployee = async (req, res) => {
     const empQuery = `
       INSERT INTO employees (
         emp_id, first_name, middle_name, last_name, date_of_birth, gender, 
-        phone_number, location, department_id, position_id, manager_id, 
+        phone_number, municipality, city, department_id, position_id, manager_id, 
         joined_date, employment_status, user_id
       ) 
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
       RETURNING *;
     `;
     const empValues = [
@@ -62,7 +62,8 @@ exports.addEmployee = async (req, res) => {
       date_of_birth,
       data.gender,
       data.phone_number,
-      data.location,
+      data.municipality,
+      data.city,
       data.department_id,
       data.position_id,
       data.manager_id,
