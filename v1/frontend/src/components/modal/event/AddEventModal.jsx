@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSuggestions } from "../../hooks/useSuggestions.js";
+import participantsList from "../../hooks/participantsList.js";
 import Modal from "../Modal";
 import IcPlus from "../../../icons/ic-plus.svg";
 import IcEvent from "../../../icons/ic-event.svg";
 import "./addEventModal.css";
-import LocationInput from "../../LocationInput.jsx";
+import DropdownInput from "../../inputs/DropdownInput.jsx";
+import ParticipantsInput from "../../inputs/ParticipantsInput.jsx";
 
 export default function AddEventModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
@@ -21,6 +23,7 @@ export default function AddEventModal({ isOpen, onClose }) {
 
   const [cityQuery, setCityQuery] = useState("");
   const [municipalityQuery, setMunicipalityQuery] = useState("");
+  const [participantsQuery, setParticipantsQuery] = useState("");
 
   // Auto-fill empty fields (optional safeguard)
   useEffect(() => {
@@ -31,7 +34,11 @@ export default function AddEventModal({ isOpen, onClose }) {
 
   // Fetch suggestions using your hook
   const citySuggestions = useSuggestions(cityQuery, "cities");
-  const municipalitySuggestions = useSuggestions(municipalityQuery, "municipalities");
+  const municipalitySuggestions = useSuggestions(
+    municipalityQuery,
+    "municipalities"
+  );
+  const participantSuggestions = participantsList(participantsQuery);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -39,6 +46,13 @@ export default function AddEventModal({ isOpen, onClose }) {
     setFormData((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
+    }));
+  };
+
+  const handleChangeList = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value, // e.target.value can be an object {username, user_id} if you adopt that
     }));
   };
 
@@ -115,7 +129,7 @@ export default function AddEventModal({ isOpen, onClose }) {
           onChange={handleChange}
         ></textarea>
 
-        <LocationInput
+        <DropdownInput
           label="City"
           name="city"
           value={formData.city}
@@ -125,7 +139,7 @@ export default function AddEventModal({ isOpen, onClose }) {
           suggestions={citySuggestions}
         />
 
-        <LocationInput
+        <DropdownInput
           label="Municipality"
           name="municipality"
           value={formData.municipality}
@@ -135,14 +149,14 @@ export default function AddEventModal({ isOpen, onClose }) {
           suggestions={municipalitySuggestions}
         />
 
-        <label htmlFor="participants">Participants</label>
-        <input
-          id="participants"
+        <ParticipantsInput
+          label="Participants"
           name="participants"
-          type="text"
-          placeholder="Participants"
           value={formData.participants}
-          onChange={handleChange}
+          onChange={handleChangeList}
+          query={participantsQuery}
+          setQuery={setParticipantsQuery}
+          suggestions={participantSuggestions}
         />
 
         <fieldset className="event-date-and-time">

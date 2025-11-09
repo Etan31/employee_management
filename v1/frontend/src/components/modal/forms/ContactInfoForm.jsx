@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSuggestions } from "../../hooks/useSuggestions";
-import LocationInput from './../../LocationInput.jsx';
+import DropdownInput from '../../inputs/DropdownInput.jsx';
 import "./ContactInfoForm.css";
 
 function ContactInfoForm({ formData, onChange }) {
@@ -28,7 +28,7 @@ function ContactInfoForm({ formData, onChange }) {
         required
       />
 
-      <LocationInput
+      <DropdownInput
         label="City"
         name="city"
         value={formData.city}
@@ -38,7 +38,7 @@ function ContactInfoForm({ formData, onChange }) {
         suggestions={citySuggestions}
       />
 
-      <LocationInput
+      <DropdownInput
         label="Municipality"
         name="municipality"
         value={formData.municipality}
