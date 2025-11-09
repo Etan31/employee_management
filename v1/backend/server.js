@@ -1,5 +1,6 @@
 const express = require("express");
 const axios = require("axios");
+const pool = require("./db/pool");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -120,6 +121,25 @@ seedAdmin().then(() => {
       res.status(500).json({ error: "Failed to fetch municipalities" });
     }
   });
+
+app.get("/api/participants", async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        u.user_id,
+        u.username,
+        e.first_name,
+        e.last_name
+      FROM users u
+      LEFT JOIN employees e ON u.user_id = e.user_id;
+    `);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error("Error fetching participants:", err.message);
+    res.status(500).json({ error: "Failed to fetch participants" });
+  }
+});
+
 
   app.post("/logout", (req, res) => {
     res.clearCookie("token", {
