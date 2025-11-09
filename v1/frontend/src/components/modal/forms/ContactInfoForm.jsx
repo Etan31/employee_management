@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSuggestions } from "../../hooks/useSuggestions";
-import LocationInput from './../../LocationInput.jsx'
+import LocationInput from './../../LocationInput.jsx';
 import "./ContactInfoForm.css";
 
 function ContactInfoForm({ formData, onChange }) {

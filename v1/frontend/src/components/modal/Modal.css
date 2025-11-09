@@ -96,6 +96,7 @@ fieldset input {
   display: flex;
   margin-bottom: 20px;
   height: 25px;
+  width: 100%;
 }
 
 .slide {
@@ -128,7 +129,8 @@ fieldset input {
 }
 
 .toggleBtn {
-  margin-top: 25px;
+  margin-top: 10px;
+   margin-left: auto;
   display: flex;
   flex-direction: row;
   gap: 25px;

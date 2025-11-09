@@ -1,9 +1,32 @@
+import { useState, useEffect } from "react";
+import { useSuggestions } from "../../hooks/useSuggestions.js";
 import Modal from "../Modal";
 import IcPlus from "../../../icons/ic-plus.svg";
 import IcEvent from "../../../icons/ic-event.svg";
 import "./addEventModal.css";
+import LocationInput from "../../LocationInput.jsx";
 
-export default function AddEventModal({ isOpen, onClose }) {
+export default function AddEventModal({
+  isOpen,
+  onClose,
+  formData = {},
+  onChange = () => {},
+}) {
+  const [cityQuery, setCityQuery] = useState("");
+  const [municipalityQuery, setMunicipalityQuery] = useState("");
+
+  // Initialize empty fields if undefined
+  useEffect(() => {
+    if (!formData.city) onChange({ target: { name: "city", value: "" } });
+    if (!formData.municipality)
+      onChange({ target: { name: "municipality", value: "" } });
+  }, []);
+
+  const citySuggestions = useSuggestions(cityQuery, "cities");
+  const municipalitySuggestions = useSuggestions(
+    municipalityQuery,
+    "municipalities"
+  );
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <header className="modal-header">
@@ -18,7 +41,7 @@ export default function AddEventModal({ isOpen, onClose }) {
           <img src={IcPlus} alt="close" className="btn-close" />
         </button>
       </header>
-      <form>
+      <form className="form-event">
         <label htmlFor="title">Title</label>
         <input id="title" name="title" type="text" placeholder="Title" />
 
@@ -34,12 +57,24 @@ export default function AddEventModal({ isOpen, onClose }) {
           maxLength={500}
         ></textarea>
 
-        <label htmlFor="location">Location</label>
-        <input
-          id="location"
-          name="location"
-          type="text"
-          placeholder="Location"
+        <LocationInput
+          label="City"
+          name="city"
+          value={formData.city}
+          onChange={onChange}
+          query={cityQuery}
+          setQuery={setCityQuery}
+          suggestions={citySuggestions}
+        />
+
+        <LocationInput
+          label="Municipality"
+          name="municipality"
+          value={formData.municipality}
+          onChange={onChange}
+          query={municipalityQuery}
+          setQuery={setMunicipalityQuery}
+          suggestions={municipalitySuggestions}
         />
 
         <label htmlFor="participants">Participants</label>
@@ -47,43 +82,39 @@ export default function AddEventModal({ isOpen, onClose }) {
           id="participants"
           name="participants"
           type="text"
+          value={formData.participants}
           placeholder="Participants"
         />
 
         <fieldset className="event-date-and-time">
           <legend>Date and Time</legend>
 
-          <label htmlFor="event_date" className="visually-hidden">
-            Date
-          </label>
           <input
-            id="event_date"
             type="number"
-            name="event_date"
-            placeholder="Date"
-            aria-label="Date"
-          />
-
-          <label htmlFor="event_hour" className="visually-hidden">
-            Hour
-          </label>
-          <input
-            id="event_hour"
-            type="number"
-            name="event_hour"
-            placeholder="HH"
-            aria-label="Hour"
-          />
-
-          <label htmlFor="event_minutes" className="visually-hidden">
-            Minutes
-          </label>
-          <input
-            id="event_minutes"
-            type="number"
-            name="event_minutes"
+            name="month"
             placeholder="MM"
-            aria-label="Minutes"
+            aria-label="Month"
+            value={formData.month}
+            onChange={onChange}
+            required
+          />
+          <input
+            type="number"
+            name="day"
+            placeholder="DD"
+            aria-label="Day"
+            value={formData.day}
+            onChange={onChange}
+            required
+          />
+          <input
+            type="number"
+            name="year"
+            placeholder="YYYY"
+            aria-label="Year"
+            value={formData.year}
+            onChange={onChange}
+            required
           />
         </fieldset>
 

@@ -7,6 +7,7 @@ function LocationInput({ label, name, value, onChange, query, setQuery, suggesti
           type="text"
           id={name}
           name={name}
+          className="location-input"
           list={`${name}List`}
           placeholder={`Start typing a ${label.toLowerCase()}...`}
           value={value || ""}

@@ -15,8 +15,29 @@ header.modal-header {
 }
 
 .input-textarea {
-  resize: both;
-  max-width: 400px;
-  max-height: 200px;
-  overflow: auto;   
+  resize:none;
+  max-width: 100%;
+  max-height: 100px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form.form-event {
+  display:flex;
+  flex-direction: column;
+  align-items:flex-start;
+  padding: 0 30px;
+}
+
+form.form-event label,
+form.form-event legend {
+  text-align: left;
+  font-size: var(--label);
+}
+
+form.form-event input {
+  width: 100%;
+  margin-bottom: 10px;
+  height: 25px;
 }
