@@ -17,7 +17,7 @@ exports.addEvent = async (req, res) => {
       data.description,
       data.city,
       data.municipality,
-      data.participants,
+      data.participants.user_id,
       event_date,
       data.attachment_url,
     ];
