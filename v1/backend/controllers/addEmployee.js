@@ -3,7 +3,7 @@ const crypto = require("crypto");
 
 exports.addEmployee = async (req, res) => {
   const data = req.body;
-  
+
   let client;
   //  To avoid unhandled exceptions during error handling.
   try {
@@ -48,8 +48,8 @@ exports.addEmployee = async (req, res) => {
     const empQuery = `
       INSERT INTO employees (
         emp_id, first_name, middle_name, last_name, date_of_birth, gender, 
-        phone_number, municipality, city, department_id, position_id, manager_id, 
-        joined_date, employment_status, user_id
+        phone_number, department_id, position_id, manager_id, 
+        joined_date, employment_status, user_id, municipality, city
       ) 
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
       RETURNING *;
@@ -62,14 +62,14 @@ exports.addEmployee = async (req, res) => {
       date_of_birth,
       data.gender,
       data.phone_number,
-      data.municipality,
-      data.city,
       data.department_id,
       data.position_id,
       data.manager_id,
       joined_date,
       data.employment_status,
       createdUserId,
+      data.municipality,
+      data.city,
     ];
 
     const empResult = await client.query(empQuery, empValues);

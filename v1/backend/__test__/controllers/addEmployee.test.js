@@ -29,8 +29,6 @@ describe("addEmployee", () => {
         day: "20",
         gender: "Male",
         phone_number: "1234567890",
-        municipality: "SanJulian",
-        city: "Borongan",
         department_id: 1,
         position_id: 2,
         manager_id: 30,
@@ -38,6 +36,8 @@ describe("addEmployee", () => {
         joined_month: "01",
         joined_day: "15",
         employment_status: "Active",
+        municipality: "SanJulian",
+        city: "Borongan",
       },
     };
 
@@ -90,14 +90,14 @@ describe("addEmployee", () => {
       "1990-05-20",
       "Male",
       "1234567890",
-      "SanJulian",
-      "Borongan",
       1,
       2,
       30,
       "2023-01-15",
       "Active",
       1234567890,
+      "SanJulian",
+      "Borongan",
     ]);
 
     // Check COMMIT call
