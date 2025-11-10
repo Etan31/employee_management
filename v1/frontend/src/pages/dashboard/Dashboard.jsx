@@ -1,4 +1,4 @@
-import { useState, React } from "react";
+import { useEffect, useState, React } from "react";
 import "./Dashboard.css";
 import Navigation from "../../components/navigation/Navigation";
 import IcView from "../../icons/ic-view.svg";
@@ -21,6 +21,29 @@ function Dashboard() {
   const handleToggle = () => {
     setOpen(!open);
   };
+
+  //initial counts for dashboard stats
+  const [stats, setStats] = useState({
+    employees: 0,
+    departments: 0,
+    activeEmployees: 0,
+  });
+    useEffect(() => {
+    async function fetchStats() {
+      try {
+        const res = await fetch("/api/stats/counts");
+        const data = await res.json();
+        setStats({
+          employees: Number(data.employees),
+          departments: Number(data.departments),
+          activeEmployees: Number(data.activeEmployees),
+        });
+      } catch (err) {
+        console.error("Failed to load stats:", err);
+      }
+    }
+    fetchStats();
+  }, []);
 
   return (
     <>
@@ -66,7 +89,12 @@ function Dashboard() {
                   </button>
                 </li>
                 <li className="li-add">
-                  <button className="btn create-event" onClick={() => setOpenEvent(true)}>Create Event</button>
+                  <button
+                    className="btn create-event"
+                    onClick={() => setOpenEvent(true)}
+                  >
+                    Create Event
+                  </button>
                 </li>
                 <li className="li-add">
                   <button className="btn add-department">Add Department</button>
@@ -78,8 +106,14 @@ function Dashboard() {
             </div>
           )}
 
-          <AddEmployeeModal isOpen={isOpenEmployee} onClose={() => setOpenEmployee(false)} />
-          <AddEventModal isOpen={isOpenEvent} onClose={() => setOpenEvent(false)} />
+          <AddEmployeeModal
+            isOpen={isOpenEmployee}
+            onClose={() => setOpenEmployee(false)}
+          />
+          <AddEventModal
+            isOpen={isOpenEvent}
+            onClose={() => setOpenEvent(false)}
+          />
 
           <div className="stats-group">
             <div className="stats total-employee-stat">
@@ -88,7 +122,7 @@ function Dashboard() {
               </div>
               <div className="text">
                 <h2>Total employee</h2>
-                <span>102</span>
+                <span>{stats.employees}</span>
               </div>
             </div>
             <div className="stats total-department-stat">
@@ -101,7 +135,7 @@ function Dashboard() {
               </div>
               <div className="text">
                 <h2>Total department</h2>
-                <span>12</span>
+                <span>{stats.departments}</span>
               </div>
             </div>
             <div className="stats active-employee-stat">
@@ -114,7 +148,7 @@ function Dashboard() {
               </div>
               <div className="text">
                 <h2>Active employee</h2>
-                <span>40</span>
+                <span>{stats.activeEmployees}</span>
               </div>
             </div>
           </div>
