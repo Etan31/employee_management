@@ -9,7 +9,7 @@ const { verifyToken } = require("./middlewares/authMiddleware");
 const seedAdmin = require("./utils/seedAdmin");
 
 const { verifyAdmin } = require("./middlewares/verifyAdmin.js");
-
+const statsRoutes = require("./routes/auth.js");
 dotenv.config();
 
 const app = express();
@@ -122,9 +122,9 @@ seedAdmin().then(() => {
     }
   });
 
-app.get("/api/participants", async (req, res) => {
-  try {
-    const result = await pool.query(`
+  app.get("/api/participants", async (req, res) => {
+    try {
+      const result = await pool.query(`
       SELECT 
         u.user_id,
         u.username,
@@ -133,13 +133,15 @@ app.get("/api/participants", async (req, res) => {
       FROM users u
       LEFT JOIN employees e ON u.user_id = e.user_id;
     `);
-    res.status(200).json(result.rows);
-  } catch (err) {
-    console.error("Error fetching participants:", err.message);
-    res.status(500).json({ error: "Failed to fetch participants" });
-  }
-});
+      res.status(200).json(result.rows);
+    } catch (err) {
+      console.error("Error fetching participants:", err.message);
+      res.status(500).json({ error: "Failed to fetch participants" });
+    }
+  });
 
+  //counts statictics of employees
+  app.use("/api/stats", statsRoutes);
 
   app.post("/logout", (req, res) => {
     res.clearCookie("token", {

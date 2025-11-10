@@ -5,6 +5,7 @@ const { registerUser, loginUser} = require("../controllers/authController");
 const { addEmployee } = require("../controllers/addEmployee");
 const { addEvent } = require("../controllers/addEvent");
 const { getEmployeeList } = require("../controllers/getEmployeeList");
+const { countActive } = require("../controllers/countActive");
 router.get("/verify", verifyToken, (req, res) => {
   res.json({ success: true, user: req.user });
 });
@@ -15,5 +16,7 @@ router.post("/login", loginUser);
 router.post("/addemployee", addEmployee);
 router.post("/addevent", addEvent);
 router.post("/getemployeelist", getEmployeeList);
+
+router.get("/counts", countActive);
 
 module.exports = router;
