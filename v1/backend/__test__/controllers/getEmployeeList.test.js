@@ -27,13 +27,22 @@ describe("getEmployeeList", () => {
   });
 
   it("should return 500 if query throws an error", async () => {
+    const consoleSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
     pool.query.mockRejectedValueOnce(new Error("DB error"));
-
     await getEmployeeList(req, res);
-
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({
       error: "Failed to fetch manager list",
     });
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "Error getting employee list:",
+      expect.any(Error)
+    );
+
+    consoleSpy.mockRestore(); // restore console.error
   });
 });
