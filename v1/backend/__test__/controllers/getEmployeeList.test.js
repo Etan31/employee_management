@@ -15,6 +15,17 @@ describe("getEmployeeList", () => {
     jest.clearAllMocks();
   });
 
+  it("should return employee list on success", async () => {
+    const mockRows = [{ user_id: 1, username: "John" }];
+    pool.query.mockResolvedValueOnce({ rows: mockRows });
+
+    await getEmployeeList(req, res);
+
+    expect(pool.query).toHaveBeenCalledWith(expect.stringContaining("SELECT"));
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(mockRows);
+  });
+
   it("should return 500 if query throws an error", async () => {
     pool.query.mockRejectedValueOnce(new Error("DB error"));
 
