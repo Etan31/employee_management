@@ -1,6 +1,8 @@
+const pool = require("../db/pool");
+
 exports.getEmployeeList = async (req, res) => {
   try {
-    const result = await poo.query(`
+    const result = await pool.query(`
       SELECT 
       *
       FROM users u
