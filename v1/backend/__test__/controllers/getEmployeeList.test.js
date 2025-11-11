@@ -1,0 +1,28 @@
+const { getEmployeeList } = require("../../controllers/getEmployeeList");
+const pool = require("../../db/pool");
+
+jest.mock("../../db/pool", () => ({ query: jest.fn() }));
+
+describe("getEmployeeList", () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = {};
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+    jest.clearAllMocks();
+  });
+
+  it("should return 500 if query throws an error", async () => {
+    pool.query.mockRejectedValueOnce(new Error("DB error"));
+
+    await getEmployeeList(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({
+      error: "Failed to fetch manager list",
+    });
+  });
+});
