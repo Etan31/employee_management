@@ -5,7 +5,6 @@ exports.addEvent = async (req, res) => {
   const data = req.body;
 
   try {
-    console.log("Incoming data:", req.body);
     const event_id = crypto.randomInt(1000000000, 9999999999);
 
     const event_date = `${data.year}-${data.month}-${data.day}`;
