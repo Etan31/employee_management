@@ -33,7 +33,7 @@ describe("add event controller", () => {
       json: jest.fn(),
     };
 
-   
+    jest.spyOn(console, "error").mockImplementation(()=>{})
     jest.clearAllMocks();
   });
 
