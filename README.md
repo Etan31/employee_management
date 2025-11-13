@@ -70,6 +70,10 @@ npx jest --config jest.config.cjs
 npx jest --config jest.config.cjs
 ```
 
+**Coverage**
+```bash
+npx jest --config jest.config.cjs --coverage
+```
 
 ## Conventional Commits
 
