@@ -91,7 +91,7 @@ classNames: this-sample-classname
 id: this-is-sample-id
 folder: this_is_sample_folder
 imports: FirstLetterIsUpperCaseSampleImport
-files: this-is-sample-file-name
+files: thisIsSampleFileName
 
 ## Notes
 - Ensure both backend and frontend run on compatible ports.
