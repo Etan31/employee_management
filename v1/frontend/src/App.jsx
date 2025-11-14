@@ -9,7 +9,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import UserManagement from "./pages/user_management/user-management";
 import Events from "./pages/events/Events";
 import Notification from "./pages/notifications/Notifications";
-import AccessControl from "./pages/access_control/access-control";
+import AccessControl from "./pages/access_control/accessControl";
 import Support from "./pages/support/Support";
 import Settings from "./pages/settings/Settings";
 
