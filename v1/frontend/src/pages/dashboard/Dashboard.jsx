@@ -10,12 +10,16 @@ import IcPlus from "../../icons/ic-plus.svg";
 
 import AddEmployeeModal from "../../components/modal/AddEmployeeModal";
 import AddEventModal from "../../components/modal/event/AddEventModal";
+import AddPosition from "../../components/modal/position/addPosition";
+import AddDepartment from "../../components/modal/department/addDepartment";
 
 function Dashboard() {
   const { user, loading } = useAuth();
   const [open, setOpen] = useState(false);
   const [isOpenEmployee, setOpenEmployee] = useState(false);
   const [isOpenEvent, setOpenEvent] = useState(false);
+  const [isOpenPosition, setOpenPosition] = useState(false);
+  const [isOpenDepartment, setOpenDepartment] = useState(false);
   if (loading) return null;
 
   const handleToggle = () => {
@@ -28,7 +32,7 @@ function Dashboard() {
     departments: 0,
     activeEmployees: 0,
   });
-    useEffect(() => {
+  useEffect(() => {
     async function fetchStats() {
       try {
         const res = await fetch("/api/stats/counts");
@@ -97,10 +101,15 @@ function Dashboard() {
                   </button>
                 </li>
                 <li className="li-add">
-                  <button className="btn add-department">Add Department</button>
+                  <button className="btn add-department" onClick={() => setOpenDepartment(true)}>Add Department</button>
                 </li>
                 <li className="li-add">
-                  <button className="btn add-department">Add Position</button>
+                  <button
+                    className="btn add-department"
+                    onClick={() => setOpenPosition(true)}
+                  >
+                    Add Position
+                  </button>
                 </li>
               </ul>
             </div>
@@ -113,6 +122,16 @@ function Dashboard() {
           <AddEventModal
             isOpen={isOpenEvent}
             onClose={() => setOpenEvent(false)}
+          />
+
+          <AddPosition
+            isOpen={isOpenPosition}
+            onClose={() => setOpenPosition(false)}
+          />
+
+          <AddDepartment
+            isOpen={isOpenDepartment}
+            onClose={() => setOpenDepartment(false)}
           />
 
           <div className="stats-group">
