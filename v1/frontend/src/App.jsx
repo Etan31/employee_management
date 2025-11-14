@@ -6,7 +6,7 @@ import AuthWrapper from "./components/AuthWrapper";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
-import UserManagement from "./pages/user_management/user-management";
+import UserManagement from "./pages/user_management/userManagement";
 import Events from "./pages/events/Events";
 import Notification from "./pages/notifications/Notifications";
 import AccessControl from "./pages/access_control/accessControl";
