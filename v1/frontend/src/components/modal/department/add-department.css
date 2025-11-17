@@ -1,0 +1,30 @@
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  width: 120px; /* fixed width for alignment */
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: var(--label);
+}
+
+.form-group input {
+  flex: 1; /* input takes remaining space */
+  height: 25px;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* right-align button */
+}
+
+.toggleBtn button {
+    border-radius: 5px;
+    border: 1px solid var(--blue);
+    padding: 8px 20px;
+}
