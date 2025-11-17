@@ -2,6 +2,8 @@ import { useState } from "react";
 import Modal from "../Modal";
 import IcPlus from "../../../icons/ic-plus.svg";
 import IcWork from "../../../icons/ic-work.svg";
+import "./add-postion.css";
+
 export default function addPosition({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     position: "",
@@ -52,17 +54,19 @@ export default function addPosition({ isOpen, onClose }) {
           <img src={IcPlus} alt="close" className="btn-close" />
         </button>
       </header>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="position">Position</label>
-        <input
-          id="position"
-          name="position"
-          type="text"
-          placeholder="Position"
-          value={formData.position}
-          onChange={handleChange}
-          required
-        />
+      <form onSubmit={handleSubmit} className="form">
+        <div className="form-group">
+          <label htmlFor="position">Position:</label>
+          <input
+            id="position"
+            name="position"
+            type="text"
+            placeholder="Position"
+            value={formData.position}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div className="toggleBtn">
           <button type="submit" className="submit">
             Submit
