@@ -1,23 +1,23 @@
-import  {useState} from "react";
+import { useState } from "react";
 import Modal from "../Modal";
 import IcPlus from "../../../icons/ic-plus.svg";
 import IcWork from "../../../icons/ic-work.svg";
 export default function addPosition({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
-      position: "",
-    });
+    position: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({      
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const res = await fetch("http://localhost:5000/addposition", {
         method: "POST",
@@ -36,7 +36,7 @@ export default function addPosition({ isOpen, onClose }) {
       console.error("Submission error:", error);
       alert("Something went wrong. Please try again.");
     }
-  }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
