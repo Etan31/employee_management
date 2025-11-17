@@ -1,8 +1,43 @@
 import Modal from "../Modal";
 import IcPlus from "../../../icons/ic-plus.svg";
 import IcWork from "../../../icons/ic-work.svg";
+import {useState} from "react";
 
 export default function addDepartment({ isOpen, onClose }) {
+  const [formData, setFormData] = useState({
+    department: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/adddepartment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to submit form");
+
+      alert("Event added successfully!");
+      onClose();
+      setFormData({
+        position: "",
+      });
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <header className="modal-header">
@@ -17,6 +52,23 @@ export default function addDepartment({ isOpen, onClose }) {
           <img src={IcPlus} alt="close" className="btn-close" />
         </button>
       </header>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="department">Department</label>
+        <input
+          id="department"
+          name="department"
+          type="text"
+          placeholder="Department"
+          value={formData.department}
+          onChange={handleChange}
+          required
+        />
+        <div className="toggleBtn">
+          <button type="submit" className="submit">
+            Submit
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 }
