@@ -14,7 +14,8 @@ export default function AddEventModal({ isOpen, onClose }) {
     description: "",
     city: "",
     municipality: "",
-    participants: "",
+    participantsId: null, // for backend
+    participantsName: "",
     month: "",
     day: "",
     year: "",
@@ -40,13 +41,31 @@ export default function AddEventModal({ isOpen, onClose }) {
   );
   const participantSuggestions = participantsList(participantsQuery);
 
+  const handleParticipantChange = (user) => {
+    if (user && user.user_id) {
+      setFormData({
+        ...formData,
+        participantsId: user.user_id,
+        participantsName: user.username,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        participantsId: null, // important to be null, not object
+        participantsName: user ? user.username : "",
+      });
+    }
+  };
+
   // Handle input changes
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+
+    if (name === "attachment") {
+      setFormData((prev) => ({ ...prev, attachment: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleChangeList = (e) => {
@@ -60,31 +79,37 @@ export default function AddEventModal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value === null) value = ""; // avoid sending null objects
+      data.append(key, value);
+    });
+
     try {
       const res = await fetch("http://localhost:5000/addevent", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: data, // no headers needed
       });
 
       if (!res.ok) throw new Error("Failed to submit form");
 
       alert("Event added successfully!");
       onClose();
+
       setFormData({
         title: "",
         description: "",
         city: "",
         municipality: "",
-        participants: "",
+        participantsId: "",
         month: "",
         day: "",
         year: "",
         attachment: null,
       });
-    } catch (error) {
-      console.error("Submission error:", error);
-      alert("Something went wrong. Please try again.");
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
     }
   };
 
@@ -150,10 +175,9 @@ export default function AddEventModal({ isOpen, onClose }) {
         />
 
         <ParticipantsInput
-          label="Participants"
-          name="participants"
-          value={formData.participants}
-          onChange={handleChangeList}
+          label="Participant"
+          value={formData.participantsName}
+          onChange={(user) => handleParticipantChange(user)}
           query={participantsQuery}
           setQuery={setParticipantsQuery}
           suggestions={participantSuggestions}
