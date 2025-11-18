@@ -9,7 +9,7 @@ const { addDepartment } = require("../controllers/addDepartment");
 const { getEmployeeList } = require("../controllers/getEmployeeList");
 const { countActive } = require("../controllers/countActive");
 
-const uploadPDF = require("../pdf/uploadPDF");
+const uploadPDF = require("../middlewares/uploadPDF");
 
 
 router.get("/verify", verifyToken, (req, res) => {
