@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 const verifyToken = require('../middlewares/verifyToken');
 const { registerUser, loginUser} = require("../controllers/authController");
 const { addEmployee } = require("../controllers/addEmployee");
@@ -20,7 +23,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 router.post("/addemployee", addEmployee);
-router.post("/addevent", uploadPDF.single("attachment"), addEvent);
+router.post("/addevent", upload.array("attachments"), addEvent);
 router.post("/getemployeelist", getEmployeeList);
 
 router.post("/addposition", addPosition);

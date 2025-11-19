@@ -59,12 +59,12 @@ export default function AddEventModal({ isOpen, onClose }) {
 
   // Handle input changes
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, files } = e.target;
 
-    if (name === "attachment") {
-      setFormData((prev) => ({ ...prev, attachment: files[0] }));
+    if (name === "attachments") {
+      setFormData((prev) => ({ ...prev, attachments: files })); // store FileList
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: e.target.value }));
     }
   };
 
@@ -81,8 +81,11 @@ export default function AddEventModal({ isOpen, onClose }) {
 
     const data = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
-      if (value === null) value = ""; // avoid sending null objects
-      data.append(key, value);
+      if (key === "attachments") {
+        Array.from(value).forEach((file) => data.append("attachments", file));
+      } else {
+        data.append(key, value || "");
+      }
     });
 
     try {
@@ -220,6 +223,7 @@ export default function AddEventModal({ isOpen, onClose }) {
           id="attachment"
           name="attachment"
           type="file"
+          multiple
           accept="application/pdf"
           title="Upload PDF file"
           onChange={handleChange}
