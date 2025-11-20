@@ -15,6 +15,8 @@ describe("add event controller", () => {
 
   beforeEach(() => {
     req = {
+      
+      // changed participants id for consistency
       body: {
         title: "Sample Event",
         description: "Event Description",
