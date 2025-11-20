@@ -15,19 +15,17 @@ describe("add event controller", () => {
 
   beforeEach(() => {
     req = {
-      
-      // changed participants id for consistency
       body: {
         title: "Sample Event",
         description: "Event Description",
         city: "Sample City",
         municipality: "Sample Municipality",
-        participants: { user_id: "12345" },
+        participantsId: "12345",
         year: "2025",
         month: "11",
         day: "12",
-        attachment_url: "https://example.com/file.pdf",
       },
+      file: null,
     };
 
     res = {
@@ -35,35 +33,33 @@ describe("add event controller", () => {
       json: jest.fn(),
     };
 
-    jest.spyOn(console, "error").mockImplementation(()=>{})
+    jest.spyOn(console, "error").mockImplementation(() => {});
     jest.clearAllMocks();
   });
 
   test("should add an event successfully", async () => {
-    // Arrange
     const fakeEventId = 1234567890;
     crypto.randomInt.mockReturnValue(fakeEventId);
-    pool.query.mockResolvedValue({ rows: [{ event_id: fakeEventId }] });
+    pool.query.mockResolvedValue({ rows: [] });
 
-    // Act
     await addEvent(req, res);
 
-    // Assert
+    const expectedDate = "2025-11-12";
+
     expect(crypto.randomInt).toHaveBeenCalledWith(1000000000, 9999999999);
 
-    const expectedDate = "2025-11-12";
     expect(pool.query).toHaveBeenCalledWith(
       expect.stringContaining("INSERT INTO events"),
-      expect.arrayContaining([
+      [
         fakeEventId,
         "Sample Event",
         "Event Description",
         "Sample City",
         "Sample Municipality",
-        "12345",
+        "12345",  
         expectedDate,
-        "https://example.com/file.pdf",
-      ])
+        null,
+      ]
     );
 
     expect(res.status).toHaveBeenCalledWith(201);
@@ -74,16 +70,11 @@ describe("add event controller", () => {
   });
 
   test("should handle database errors", async () => {
-    // Arrange
-    const error = new Error("DB error");
     crypto.randomInt.mockReturnValue(9876543210);
-    pool.query.mockRejectedValue(error);
+    pool.query.mockRejectedValue(new Error("DB error"));
 
-    // Act
     await addEvent(req, res);
 
-    // Assert
-    expect(pool.query).toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({
       error: "Failed to add event",
